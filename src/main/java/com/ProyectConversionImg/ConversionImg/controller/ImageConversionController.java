@@ -28,7 +28,7 @@ public class ImageConversionController {
         this.imageConversionService = imageConversionService;
     }
 
-    @PostMapping("/convert-multiple")
+    @PostMapping("/convert")
     public ResponseEntity<byte[]> convertMultipleImages(
             @RequestParam("files") MultipartFile[] files,
             @RequestParam("format") String format
@@ -58,7 +58,8 @@ public class ImageConversionController {
         }
     }
 
-    private MediaType getMediaType(String format){
+
+    public MediaType getMediaType(String format){
         return switch (format.toLowerCase()){
             case "png" -> MediaType.IMAGE_PNG;
             case "jpg","jpeg" -> MediaType.IMAGE_JPEG;
