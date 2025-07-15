@@ -28,7 +28,27 @@ public class ImageConversionController {
         this.imageConversionService = imageConversionService;
     }
 
+    //Todo: Para convertir una sola imagen
     @PostMapping("/convert")
+    public ResponseEntity<byte[]> convertImage(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("format") String format
+    ) {
+        try {
+            byte[] converted = imageConversionService.convertImage(file, format);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(getMediaType(format));
+            headers.setContentDispositionFormData("attachment", "imagen_convertida." + format);
+
+            return new ResponseEntity<>(converted, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    //Todo: Para convertir varias imagenes
+    @PostMapping("/convert-Multiple")
     public ResponseEntity<byte[]> convertMultipleImages(
             @RequestParam("files") MultipartFile[] files,
             @RequestParam("format") String format
@@ -58,7 +78,22 @@ public class ImageConversionController {
         }
     }
 
+    @PostMapping("/convert-to-webp")
+    public ResponseEntity<byte[]> convertToWebP(@RequestParam("file") MultipartFile file) {
+        try {
+            byte[] converted = imageConversionService.convertToWebP(file);
 
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.valueOf("image/webp"));
+            headers.setContentDispositionFormData("attachment", "converted.webp");
+
+            return new ResponseEntity<>(converted, headers, HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    //Todo: Conversion de imagenes a cualquier formato
     public MediaType getMediaType(String format){
         return switch (format.toLowerCase()){
             case "png" -> MediaType.IMAGE_PNG;
@@ -66,7 +101,7 @@ public class ImageConversionController {
             case "gif" -> MediaType.IMAGE_GIF;
             case "bmp" -> MediaType.valueOf("image/bmp");
             case "tiff", "tif" -> MediaType.valueOf("image/tiff");
-            case  "webp" -> MediaType.valueOf("image/webp");
+            case "webp" -> MediaType.valueOf("image/webp");
             default ->  MediaType.APPLICATION_OCTET_STREAM;
         };
     }
