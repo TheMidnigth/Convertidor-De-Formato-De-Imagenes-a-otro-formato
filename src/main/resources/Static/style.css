@@ -1,0 +1,54 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero__header{
+    position: fixed;
+    top: 20px;
+    left: 80px;
+    width: 90%;
+    height: 80px;
+    background-color: red;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 0 50px;
+    border-radius: 50px;
+
+}
+
+.header__navbar{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+
+.navbar__list{
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+
+.item__link{
+    font: 700 20px "Nura";
+    text-decoration: none;
+}
+
+.hero__header .header__item{
+    list-style: none;
+}
+
+.header__logo{
+    font: 700 20px "Nura";
+}
+
+.hero__content{
+    background-color: blue;
+}
+.content__information .information__title{
+    font: 900 60px "Nura";
+    width: 1200px;
+}
