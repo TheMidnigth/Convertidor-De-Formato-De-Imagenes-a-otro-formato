@@ -77,6 +77,7 @@ html{
 }
 
 .hero__header {
+    z-index: 1;
     position: fixed;
     top: 20px;
     left: 80px;
@@ -181,4 +182,139 @@ html{
     background-color: var(--colorCuartario);
     color: var(--colorSecundario);
     box-shadow: 0 5px 10px 0 #aaa;
+}
+
+.logos{
+    width: 80%;
+    display: flex;
+    margin: auto;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    margin-top: calc(10vh - 10px);
+}
+
+.logos__slide{
+    animation: 10s slide infinite linear;
+    img{
+        height: 50px;
+        margin: 0 70px;
+    }
+}
+
+.logos::before{
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+}
+
+.logos::after{
+    content: "";
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+}
+
+@keyframes slide{
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(-100%);
+    }
+}
+
+.servicios{
+    height: 100vh;
+    width: 100%;
+    background: white;
+    position: relative;
+    background-image: 
+        linear-gradient(to right, rgba(229,231,235,0.8) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(229,231,235,0.8) 1px, transparent 1px),
+        radial-gradient(circle 500px at 20% 20%, rgba(139,92,246,0.5), transparent),
+        radial-gradient(circle 500px at 80% 80%, rgba(59,130,246,0.5), transparent);
+    background-size:48px 48px, 48px 48px, 100% 100%, 100% 100%;
+}
+
+.servicios__content{
+    padding-top: 120px;
+}
+
+.content__informacion{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content__informacion .informacion__title{
+    font: 900 80px "Urbanist";
+}
+
+
+.content__informacion .informacion__text{
+    font: 500 20px "Urbanist";
+    max-width: 1000px;
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+.content__card{
+    margin: auto;
+    max-width: 1500px;
+    padding: 20px 0 0 0;
+    gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.card__item{
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.6); /* Blanco casi opaco */
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition:border .7s ease, .7s ease, box-shadow .7s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    flex: 0 1 450px;
+    min-width: 350px;
+    min-height: 230px;
+}
+
+.card__item:hover{
+    border: 2px solid var(--colorTercario);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.card__item .item__logo i{
+    font-size:40px;
+    color: var(--colorTercario);
+    margin-bottom: 10px;
+}
+
+.card__item .item__titulo{
+    color: #1F2937;
+    font: 600 25px "Urbanist";
+    margin-bottom: 10px;
+}
+
+.card__item .item__texto{
+    text-align: center;
+    color: #374151; 
+    font: 500 17px "Urbanist";
 }
