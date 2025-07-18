@@ -1,16 +1,16 @@
-:root{
-    --colorPrimario:#48f;
-    --colorSecundario:#000000;
+:root {
+    --colorPrimario: #48f;
+    --colorSecundario: #000000;
     --colorTercario: #6366f1;
-    --colorCuartario:#ffffff;
+    --colorCuartario: #ffffff;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -25,36 +25,36 @@ html{
     background-image:
         linear-gradient(to right, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
-        radial-gradient(circle 500px at 20% 80%, rgba(139,92,246,0.5), transparent),
-        radial-gradient(circle 500px at 80% 20%, rgba(59,130,246,0.5), transparent);
+        radial-gradient(circle 500px at 20% 80%, rgba(139, 92, 246, 0.5), transparent),
+        radial-gradient(circle 500px at 80% 20%, rgba(59, 130, 246, 0.5), transparent);
     background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
 }
 
 
-.content__img{
+.content__img {
     position: relative;
-    
+
 }
 
-.content__img img{
+.content__img img {
     max-width: 100%;
 }
 
 
-.img--rigth img{
+.img--rigth img {
     border: 4px solid var(--colorCuartario);
     position: absolute;
     top: -20px;
     left: 89%;
     border-radius: 50%;
-    background: linear-gradient(to bottom, rgba(139,92,246,0.9) 20%, rgba(139,92,246,0) 80%);
+    background: linear-gradient(to bottom, rgba(139, 92, 246, 0.9) 20%, rgba(139, 92, 246, 0) 80%);
     width: 150px;
     height: 150px;
 
 }
 
 
-.img--left img{
+.img--left img {
     position: absolute;
     top: -200px;
     left: 3em;
@@ -62,17 +62,17 @@ html{
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background: linear-gradient(to bottom, rgba(59,130,246,0.9), rgba(59,130,246,0)); 
+    background: linear-gradient(to bottom, rgba(59, 130, 246, 0.9), rgba(59, 130, 246, 0));
 
 }
 
-.header__logo{
+.header__logo {
     padding-left: 20px;
     font: 900 25px "Urbanist";
     color: var(--colorSecundario);
 }
 
-.header__logo .logo__blue{
+.header__logo .logo__blue {
     color: var(--colorTercario);
 }
 
@@ -83,11 +83,11 @@ html{
     left: 80px;
     width: 90%;
     height: 80px;
-    background: rgba(255, 255, 255, 0.08); 
+    background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -95,37 +95,37 @@ html{
     border-radius: 50px;
 }
 
-.header__navbar{
+.header__navbar {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
 
-.navbar__list{
+.navbar__list {
     display: flex;
     gap: 20px;
     list-style: none;
 }
 
 
-.item__link{
+.item__link {
     font: 700 20px "Urbanist";
     text-decoration: none;
     cursor: pointer;
     color: var(--colorSecundario);
-    transition:color .7s ease;
+    transition: color .7s ease;
 }
 
-.item__link:hover{
+.item__link:hover {
     color: var(--colorTercario);
 }
 
 
-.hero__header .header__item{
+.hero__header .header__item {
     list-style: none;
 }
 
-.header__item .item__empezar{
+.header__item .item__empezar {
     text-decoration: none;
     font: 700 20px "Urbanist";
     background-color: var(--colorTercario);
@@ -136,39 +136,39 @@ html{
 }
 
 
-.hero__content{
-    padding: 140px 0 0 0 ;
+.hero__content {
+    padding: 140px 0 0 0;
 }
 
-.hero__content .content__information{
+.hero__content .content__information {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.content__information .information__title{
-    font: 900 100px/1.1 "Urbanist";
+.content__information .information__title {
+    font: 900 100px/1.1 "Bricolage Grotesque";
     margin-bottom: 20px;
     width: 1300px;
     color: var(--colorSecundario);
     text-align: center;
 }
 
-.content__information .information__subtitulo{
-    font: 500 20px "Urbanist";
+.content__information .information__subtitulo {
+    font: 500 20px "Bricolage Grotesque";
     width: 800px;
     text-align: center;
     color: var(--colorSecundario);
 }
 
-.hero__content .information__button{
+.hero__content .information__button {
     display: flex;
     margin-top: 20px;
     gap: 20px;
 }
 
-.information__button .button__item{
+.information__button .button__item {
     text-decoration: none;
     background-color: var(--colorTercario);
     color: var(--colorCuartario);
@@ -178,13 +178,13 @@ html{
     font: 700 20px "Urbanist";
 }
 
-.information__button .item--white{
+.information__button .item--white {
     background-color: var(--colorCuartario);
     color: var(--colorSecundario);
     box-shadow: 0 5px 10px 0 #aaa;
 }
 
-.logos{
+.logos {
     width: 80%;
     display: flex;
     margin: auto;
@@ -194,15 +194,16 @@ html{
     margin-top: calc(10vh - 10px);
 }
 
-.logos__slide{
+.logos__slide {
     animation: 10s slide infinite linear;
-    img{
+
+    img {
         height: 50px;
         margin: 0 70px;
     }
 }
 
-.logos::before{
+.logos::before {
     content: "";
     z-index: 1;
     position: absolute;
@@ -212,7 +213,7 @@ html{
     height: 100%;
 }
 
-.logos::after{
+.logos::after {
     content: "";
     z-index: 1;
     position: absolute;
@@ -222,52 +223,55 @@ html{
     height: 100%;
 }
 
-@keyframes slide{
-    from{
+@keyframes slide {
+    from {
         transform: translateX(0);
     }
-    to{
+
+    to {
         transform: translateX(-100%);
     }
 }
 
-.servicios{
-    height: 100vh;
+
+/* Section servicios */
+.servicios {
+    min-height: 100vh;
     width: 100%;
     background: white;
     position: relative;
-    background-image: 
-        linear-gradient(to right, rgba(229,231,235,0.8) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(229,231,235,0.8) 1px, transparent 1px),
-        radial-gradient(circle 500px at 20% 20%, rgba(139,92,246,0.5), transparent),
-        radial-gradient(circle 500px at 80% 80%, rgba(59,130,246,0.5), transparent);
-    background-size:48px 48px, 48px 48px, 100% 100%, 100% 100%;
+    background-image:
+        linear-gradient(to right, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+        radial-gradient(circle 500px at 20% 20%, rgba(139, 92, 246, 0.5), transparent),
+        radial-gradient(circle 500px at 80% 80%, rgba(59, 130, 246, 0.5), transparent);
+    background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
 }
 
-.servicios__content{
+.servicios__content {
     padding-top: 120px;
 }
 
-.content__informacion{
+.content__informacion {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.content__informacion .informacion__title{
-    font: 900 80px "Urbanist";
+.content__informacion .informacion__title {
+    font: 900 80px "Bricolage Grotesque";
 }
 
 
-.content__informacion .informacion__text{
+.content__informacion .informacion__text {
     font: 500 20px "Urbanist";
     max-width: 1000px;
     text-align: center;
     margin: 0 0 10px 0;
 }
 
-.content__card{
+.content__card {
     margin: auto;
     max-width: 1500px;
     padding: 20px 0 0 0;
@@ -278,43 +282,184 @@ html{
     align-items: center;
 }
 
-.card__item{
+.card__item {
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     padding: 10px 20px;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.6); /* Blanco casi opaco */
+    background: rgba(255, 255, 255, 0.6);
+    /* Blanco casi opaco */
     cursor: pointer;
     border: 2px solid rgba(255, 255, 255, 0.3);
-    transition:border .7s ease, .7s ease, box-shadow .7s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: border .7s ease, .7s ease, box-shadow .7s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     flex: 0 1 450px;
     min-width: 350px;
     min-height: 230px;
 }
 
-.card__item:hover{
+.card__item:hover {
     border: 2px solid var(--colorTercario);
     transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.card__item .item__logo i{
-    font-size:40px;
+.card__item .item__logo i {
+    font-size: 40px;
     color: var(--colorTercario);
     margin-bottom: 10px;
 }
 
-.card__item .item__titulo{
+.card__item .item__titulo {
     color: #1F2937;
-    font: 600 25px "Urbanist";
+    font: 600 25px "Bricolage Grotesque";
     margin-bottom: 10px;
 }
 
-.card__item .item__texto{
+.card__item .item__texto {
     text-align: center;
-    color: #374151; 
+    color: #374151;
     font: 500 17px "Urbanist";
+}
+
+.conversiones {
+    background-color: white;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-image:
+        linear-gradient(to right, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+        radial-gradient(circle 500px at 20% 80%, rgba(139, 92, 246, 0.5), transparent),
+        radial-gradient(circle 500px at 80% 20%, rgba(59, 130, 246, 0.5), transparent);
+    background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
+}
+
+.content__populares {
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+
+.content__populares .populares__item {
+    flex: 0 1 250px;
+    display: flex;
+    cursor: pointer;
+    padding: 0 0 0 20px;
+    justify-content: start;
+    align-items: center;
+    min-height: 50px;
+    transition: border .7s ease, .7s ease, box-shadow .7s ease;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: border .7s ease, .7s ease, box-shadow .7s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.content__populares .populares__item:hover {
+    border: 2px solid var(--colorTercario);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.populares__item .item__formatos {
+    font: 500 20px "Urbanist";
+    color: #374151;
+}
+
+/* Section Formato */
+.FAQ {
+    min-height: 100vh;
+    width: 100%;
+    background: white;
+    position: relative;
+    background-image:
+        linear-gradient(to right, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+        radial-gradient(circle 500px at 20% 20%, rgba(139, 92, 246, 0.5), transparent),
+        radial-gradient(circle 500px at 80% 80%, rgba(59, 130, 246, 0.5), transparent);
+    background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
+
+}
+
+.formato__content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-top: 120px;
+}
+
+.content__infomacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.content__infomacion .informacion__title {
+    font: 900 80px "Bricolage Grotesque";
+}
+
+.content__infomacion .informacion__text {
+    font: 500 20px "Urbanist";
+    max-width: 1000px;
+    text-align: center;
+    margin: 10px 0 10px 0;
+}
+
+.accordion {
+    max-width: 1300px;
+}
+
+
+
+.accordion__button {
+    font: 600 20px "Bricolage Grotesque";
+    width: 100%;
+    text-align: left;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.accordion__button:hover {
+    background: #e5e7eb;
+}
+
+.accordion__icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion__content {
+    font: 500 18px "Urbanist";
+    max-height: 0;
+    overflow: hidden;
+    background: var(--colorCuartario);
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 15px;
+    color: #4b5563;
+}
+
+.accordion__content.open {
+    padding: 15px;
+    max-height: 200px;
 }
