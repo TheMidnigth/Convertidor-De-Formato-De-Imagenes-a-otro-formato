@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.print.attribute.standard.Media;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @RestController
 @RequestMapping("api/images")
@@ -83,26 +86,69 @@ public class ImageConversionController {
         try {
             byte[] converted = imageConversionService.convertToWebP(file);
 
+            String originalName = file.getOriginalFilename();
+            String baseName = (originalName != null)
+                    ? originalName.replaceFirst("[.][^.]+$", "")
+                    : "converted";
+
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.valueOf("image/webp"));
-            headers.setContentDispositionFormData("attachment", "converted.webp");
+            headers.setContentDispositionFormData("attachment", baseName + ".webp");
+            headers.setContentLength(converted.length);
 
             return new ResponseEntity<>(converted, headers, HttpStatus.OK);
+
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            e.printStackTrace(); // Para debug en consola
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(("Error al convertir la imagen: " + e.getMessage()).getBytes());
         }
     }
 
-    //Todo: Conversion de imagenes a cualquier formato
-    public MediaType getMediaType(String format){
-        return switch (format.toLowerCase()){
+    @PostMapping("/convert-multiple-webp")
+    public ResponseEntity<byte[]> convertMultipleToWebP(@RequestParam("files") MultipartFile[] files) {
+        try (ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                ZipOutputStream zipOut = new ZipOutputStream(byteArrayOutputStream)) {
+
+            for (MultipartFile file : files) {
+                byte[] converted = imageConversionService.convertToWebP(file);
+
+                String originalName = file.getOriginalFilename();
+                String baseName = (originalName != null)
+                        ? originalName.replaceFirst("[.][^.]+$", "")
+                        : "converted";
+
+                ZipEntry zipEntry = new ZipEntry(baseName + ".webp");
+                zipOut.putNextEntry(zipEntry);
+                zipOut.write(converted);
+                zipOut.closeEntry();
+            }
+
+            zipOut.finish();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", "converted-images.zip");
+
+            return new ResponseEntity<>(byteArrayOutputStream.toByteArray(), headers, HttpStatus.OK);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(("Error al convertir múltiples imágenes: " + e.getMessage()).getBytes());
+        }
+    }
+
+    public MediaType getMediaType(String format) {
+        return switch (format.toLowerCase()) {
             case "png" -> MediaType.IMAGE_PNG;
-            case "jpg","jpeg" -> MediaType.IMAGE_JPEG;
+            case "jpg", "jpeg" -> MediaType.IMAGE_JPEG;
             case "gif" -> MediaType.IMAGE_GIF;
             case "bmp" -> MediaType.valueOf("image/bmp");
             case "tiff", "tif" -> MediaType.valueOf("image/tiff");
             case "webp" -> MediaType.valueOf("image/webp");
-            default ->  MediaType.APPLICATION_OCTET_STREAM;
+            case "avif" -> MediaType.valueOf("image/avif");  // 👈 agregamos AVIF
+            default -> MediaType.APPLICATION_OCTET_STREAM;
         };
     }
 }

@@ -5,10 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 @Service
 public class ImageConversionService {
@@ -36,45 +33,57 @@ public class ImageConversionService {
         return outputStream.toByteArray();
     }
 
-    private static final String CWEBP_PATH = "C:\\Users\\Keyner Reyes\\Downloads\\libwebp-1.4.0-windows-x64\\bin\\cwebp.exe";
+    private static final String CWEBP_PATH = "C:\\Users\\Keyner Reyes\\Downloads\\libwebp-1.4.0-windows-x64\\libwebp-1.4.0-windows-x64\\bin\\cwebp";
 
     public byte[] convertToWebP(MultipartFile file) throws IOException {
-        // Guardar el archivo temporalmente
-        File tempInput = File.createTempFile("input-", "-" + file.getOriginalFilename());
-        try (FileOutputStream fos = new FileOutputStream(tempInput)) {
-            fos.write(file.getBytes());
-        }
+        String originalFilename = file.getOriginalFilename();
+        String extension = (originalFilename != null && originalFilename.contains("."))
+                ? originalFilename.substring(originalFilename.lastIndexOf("."))
+                : ".png"; // Por defecto PNG si no hay extensión
 
-        // Definir archivo de salida
-        File tempOutput = File.createTempFile("output-", ".webp");
-
-        // Ejecutar el comando cwebp
-        ProcessBuilder pb = new ProcessBuilder(
-                CWEBP_PATH,
-                tempInput.getAbsolutePath(),
-                "-o",
-                tempOutput.getAbsolutePath()
-        );
-
-        Process process = pb.start();
+        File tempInput = null;
+        File tempOutput = null;
 
         try {
+            tempInput = File.createTempFile("input-", extension);
+            file.transferTo(tempInput);
+
+            tempOutput = File.createTempFile("output-", ".webp");
+
+            ProcessBuilder pb = new ProcessBuilder(
+                    CWEBP_PATH,
+                    tempInput.getAbsolutePath(),
+                    "-q", "80",
+                    "-o", tempOutput.getAbsolutePath()
+            );
+
+            pb.redirectErrorStream(true);
+            Process process = pb.start();
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            }
+
             int exitCode = process.waitFor();
             if (exitCode != 0) {
-                throw new RuntimeException("Error al convertir la imagen con cwebp, código: " + exitCode);
+                throw new RuntimeException("Error al convertir la imagen con cwebp. Código de salida: " + exitCode);
             }
+
+            return java.nio.file.Files.readAllBytes(tempOutput.toPath());
+
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             throw new RuntimeException("Conversión interrumpida", e);
+        } finally {
+            if (tempInput != null && tempInput.exists()) {
+                tempInput.delete();
+            }
+            if (tempOutput != null && tempOutput.exists()) {
+                tempOutput.delete();
+            }
         }
-
-        // Leer el archivo convertido
-        byte[] convertedBytes = java.nio.file.Files.readAllBytes(tempOutput.toPath());
-
-        // Limpiar archivos temporales
-        tempInput.delete();
-        tempOutput.delete();
-
-        return convertedBytes;
     }
 }
