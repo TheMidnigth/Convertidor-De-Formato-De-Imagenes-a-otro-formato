@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     gsap.from(".header__item", {
-        y: 1200,
+        x: 400,
         opacity: 0,
         duration: 1
     });
@@ -90,18 +90,28 @@ window.addEventListener('DOMContentLoaded', () => {
 
     });
 
-    const logosContainer = document.getElementById("logos");
+    const text2 = new SplitType('.information__subtitulo', { types: "words,chars" });
 
-    // Elimina cualquier clon previo si existe
-    const clonPrevio = logosContainer.querySelector('.slider-clone');
-    if (clonPrevio) {
-        clonPrevio.remove();
-    }
+    text2.chars.forEach((char,index) => {
 
-    // Clonamos de nuevo el slider original
-    const logos = document.getElementById("slider").cloneNode(true);
-    logos.classList.add('slider-clone');
-    logosContainer.appendChild(logos);
+        let chartTL = gsap.timeline();
+        
+        chartTL.from(char,{
+            y:300,
+            ease: "back.out",
+            opacity:1,
+            duration:.55,
+            delay:index * 0.001
+        })
+    })
+
+    gsap.from(".button__item",{
+        y:400,
+        delay:.25,
+        duration:.65,
+        opacity:0,
+        ease:"back.out"
+    })
 
     //Acordion javascript
     const accordionButtons = document.querySelectorAll('.accordion__button');
@@ -135,8 +145,6 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-
 
 });
 

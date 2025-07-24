@@ -147,7 +147,7 @@ public class ImageConversionController {
             case "bmp" -> MediaType.valueOf("image/bmp");
             case "tiff", "tif" -> MediaType.valueOf("image/tiff");
             case "webp" -> MediaType.valueOf("image/webp");
-            case "avif" -> MediaType.valueOf("image/avif");  // 👈 agregamos AVIF
+            case "avif" -> MediaType.valueOf("image/avif");
             default -> MediaType.APPLICATION_OCTET_STREAM;
         };
     }
